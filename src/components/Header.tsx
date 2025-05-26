@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { CleverlyLogo } from "@/components/CleverlyLogo";
 import {
   NavigationMenu,
   NavigationMenuContent,
@@ -42,14 +43,8 @@ export function Header() {
       )}
     >
       <div className="container mx-auto flex justify-between items-center">
-        <Link href="/" className="flex items-center space-x-2">
-          <Image
-            src="/logo.svg"
-            alt="NexusAI Logo"
-            width={32}
-            height={32}
-          />
-          <span className="font-bold text-xl tracking-tight">NexusAI</span>
+        <Link href="/" className="flex items-center">
+          <CleverlyLogo width={200} height={60} />
         </Link>
 
         <NavigationMenu>
@@ -93,16 +88,16 @@ export function Header() {
               </NavigationMenuTrigger>
               <NavigationMenuContent>
                 <ul className="grid gap-3 p-6 w-[400px] md:grid-cols-2 bg-black/95">
-                  <ListItem href="/products/nexus-suite" title="Nexus Suite">
+                  <ListItem href="/products/cleverly-suite" title="cleverly Suite">
                     Enterprise AI platform
                   </ListItem>
-                  <ListItem href="/products/nexus-vision" title="Nexus Vision">
+                  <ListItem href="/products/cleverly-vision" title="cleverly Vision">
                     Computer vision solutions
                   </ListItem>
-                  <ListItem href="/products/nexus-language" title="Nexus Language">
+                  <ListItem href="/products/cleverly-language" title="cleverly Language">
                     Advanced language models
                   </ListItem>
-                  <ListItem href="/products/nexus-api" title="Nexus API">
+                  <ListItem href="/products/cleverly-api" title="cleverly API">
                     Integrate our AI into your products
                   </ListItem>
                 </ul>
@@ -118,7 +113,7 @@ export function Header() {
                     Building AI for human benefit
                   </ListItem>
                   <ListItem href="/about/team" title="Our Team">
-                    The people behind NexusAI
+                    The people behind cleverly
                   </ListItem>
                   <ListItem href="/about/ethics" title="Ethics & Safety">
                     Our approach to responsible AI
@@ -161,8 +156,11 @@ export function Header() {
         </NavigationMenu>
 
         <div className="flex items-center space-x-4">
-          <Button variant="outline" className="border-gray-700 hover:bg-gray-900">
-            Sign In
+          <Button 
+            variant="outline" 
+            className="bg-black text-white border border-gray-700 hover:bg-gray-900 shadow-md z-[999] transition-all duration-200"
+          >
+            Login
           </Button>
           <Button className="bg-white text-black hover:bg-gray-200">
             Try Demo

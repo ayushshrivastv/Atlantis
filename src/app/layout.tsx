@@ -5,7 +5,7 @@ import "./globals.css";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "NexusAI - Advanced AI Research & Deployment",
+  title: "cleverly - Advanced AI Research & Deployment",
   description: "Pioneering AI research and deployment solutions for a smarter future.",
   icons: {
     icon: "/favicon.ico",

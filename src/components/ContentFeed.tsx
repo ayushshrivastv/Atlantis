@@ -26,8 +26,8 @@ const contentCategories: ContentCategory[] = [
     title: "Featured",
     items: [
       {
-        id: "nexus-core",
-        title: "Introducing Nexus Core",
+        id: "cleverly-core",
+        title: "Introducing cleverly Core",
         description: "Our flagship AI system with breakthrough capabilities in reasoning and problem-solving",
         image: "https://ext.same-assets.com/1513452751/1406521742.webp",
         type: "Release",
@@ -56,7 +56,7 @@ const contentCategories: ContentCategory[] = [
     items: [
       {
         id: "new-office",
-        title: "NexusAI Opens New Research Lab in Toronto",
+        title: "cleverly Opens New Research Lab in Toronto",
         description: "Expanding our global research footprint",
         image: "https://ext.same-assets.com/1513452751/780556859.webp",
         type: "Company",
@@ -75,7 +75,7 @@ const contentCategories: ContentCategory[] = [
       {
         id: "conference",
         title: "Join Us at AI Summit 2025",
-        description: "NexusAI researchers to present latest breakthroughs",
+        description: "cleverly researchers to present latest breakthroughs",
         image: "https://ext.same-assets.com/1513452751/2530830555.webp",
         type: "Event",
         readTime: "2 min read",

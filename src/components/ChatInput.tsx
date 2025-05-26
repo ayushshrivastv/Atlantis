@@ -76,7 +76,7 @@ export function ChatInput() {
 
       <div className="flex justify-center mt-4 space-x-2">
         <button className="text-sm text-gray-400 hover:text-white px-3 py-1 rounded-md transition-colors">
-          Search with NexusAI
+          Search with cleverly
         </button>
         <button className="text-sm text-gray-400 hover:text-white px-3 py-1 rounded-md transition-colors">
           Voice Chat

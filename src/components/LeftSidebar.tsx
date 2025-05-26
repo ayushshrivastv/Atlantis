@@ -3,16 +3,13 @@
 import Link from "next/link";
 import Image from "next/image";
 import { useState } from "react";
+import { CleverlyLogo } from "@/components/CleverlyLogo";
 import { cn } from "@/lib/utils";
 
 const navigationItems = [
-  { name: "Research", href: "/research" },
-  { name: "Safety", href: "/safety" },
-  { name: "Products", href: "/products" },
-  { name: "NexusAI Assistant", href: "/assistant" },
-  { name: "API Platform", href: "/api" },
-  { name: "For Business", href: "/business" },
-  { name: "Company", href: "/company" },
+  { name: "Home", href: "/" },
+  { name: "Documentation", href: "/documentation" },
+  { name: "Cleverly AI", href: "/cleverly-ai" },
   { name: "News", href: "/news" },
 ];
 
@@ -21,14 +18,8 @@ export function LeftSidebar() {
 
   return (
     <div className="fixed left-0 top-0 h-full w-48 py-6 px-4 bg-black flex flex-col">
-      <Link href="/" className="flex items-center space-x-2 mb-8 px-2">
-        <Image
-          src="/logo.svg"
-          alt="NexusAI Logo"
-          width={32}
-          height={32}
-        />
-        <span className="font-semibold text-xl tracking-tight">NexusAI</span>
+      <Link href="/" className="flex items-center justify-center mb-8 px-2">
+        <CleverlyLogo width={140} height={40} className="mx-auto" />
       </Link>
 
       <nav className="flex-1">

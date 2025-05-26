@@ -3,7 +3,9 @@
 import { LeftSidebar } from "@/components/LeftSidebar";
 import { ChatInput } from "@/components/ChatInput";
 import { ContentFeed } from "@/components/ContentFeed";
+import { Button } from "@/components/ui/button";
 import { useEffect, useState } from "react";
+import Link from "next/link";
 
 export default function Home() {
   const [showScroll, setShowScroll] = useState(true);
@@ -23,6 +25,17 @@ export default function Home() {
   }, []);
   return (
     <div className="flex min-h-screen bg-black">
+      {/* Login Button */}
+      <div className="fixed top-4 right-4 z-[999]">
+        <Button 
+          variant="outline" 
+          className="bg-black text-white border border-gray-700 hover:bg-gray-900 shadow-md transition-all duration-200"
+          asChild
+        >
+          <Link href="/login">Login</Link>
+        </Button>
+      </div>
+      
       {/* Left Sidebar */}
       <LeftSidebar />
 

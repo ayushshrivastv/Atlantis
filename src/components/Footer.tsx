@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import Image from "next/image";
+import { CleverlyLogo } from "@/components/CleverlyLogo";
 
 const footerLinks = {
   company: [
@@ -12,10 +13,10 @@ const footerLinks = {
     { name: "Contact", href: "/contact" },
   ],
   products: [
-    { name: "Nexus Core", href: "/products/nexus-core" },
-    { name: "Nexus Vision", href: "/products/nexus-vision" },
-    { name: "Nexus Language", href: "/products/nexus-language" },
-    { name: "Nexus API", href: "/products/nexus-api" },
+    { name: "cleverly Core", href: "/products/cleverly-core" },
+    { name: "cleverly Vision", href: "/products/cleverly-vision" },
+    { name: "cleverly Language", href: "/products/cleverly-language" },
+    { name: "cleverly API", href: "/products/cleverly-api" },
     { name: "Pricing", href: "/pricing" },
   ],
   resources: [
@@ -91,14 +92,7 @@ export function Footer() {
         <div className="grid grid-cols-2 md:grid-cols-5 gap-8 mb-12">
           <div className="col-span-2">
             <Link href="/" className="flex items-center mb-6">
-              <Image
-                src="/logo.svg"
-                alt="NexusAI Logo"
-                width={40}
-                height={40}
-                className="mr-2"
-              />
-              <span className="font-bold text-xl tracking-tight">NexusAI</span>
+              <CleverlyLogo width={200} height={60} />
             </Link>
             <p className="text-gray-400 mb-6 max-w-md">
               Pioneering AI research and deployment solutions that responsibly advance artificial intelligence for the benefit of humanity.
@@ -167,7 +161,7 @@ export function Footer() {
 
         <div className="pt-8 mt-8 border-t border-gray-800 md:flex md:items-center md:justify-between">
           <div className="text-sm text-gray-400">
-            &copy; {new Date().getFullYear()} NexusAI, Inc. All rights reserved.
+            &copy; {new Date().getFullYear()} cleverly, Inc. All rights reserved.
           </div>
           <div className="mt-4 flex space-x-6 md:mt-0">
             {footerLinks.legal.map((link) => (
