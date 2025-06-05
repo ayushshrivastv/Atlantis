@@ -11,9 +11,10 @@ interface Message {
 
 interface FloatingChatContainerProps {
   messages: Message[];
+  isLoading?: boolean; // Add isLoading prop
 }
 
-export function FloatingChatContainer({ messages }: FloatingChatContainerProps) {
+export function FloatingChatContainer({ messages, isLoading }: FloatingChatContainerProps) { // Destructure isLoading
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
 
@@ -77,22 +78,11 @@ export function FloatingChatContainer({ messages }: FloatingChatContainerProps) 
           ))}
           
           {/* Loading indicator for when assistant is thinking */}
-          {messages.length > 0 && messages[messages.length - 1].sender === 'user' && (
+          {isLoading && (
             <div className="flex justify-start">
-              <div className="bg-gray-800 text-gray-100 rounded-2xl px-4 py-3 border border-gray-700 max-w-[70%]">
-                <div className="flex items-center mb-2">
-                  <div className="w-6 h-6 rounded-full bg-gradient-to-r from-blue-500 to-purple-600 flex items-center justify-center text-xs font-semibold text-white mr-2">
-                    AI
-                  </div>
-                  <span className="text-xs text-gray-400">Assistant</span>
-                </div>
-                <div className="flex items-center space-x-1">
-                  <div className="flex space-x-1">
-                    <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce"></div>
-                    <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '0.1s' }}></div>
-                    <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '0.2s' }}></div>
-                  </div>
-                  <span className="text-xs text-gray-500 ml-2">Thinking...</span>
+              <div className="bg-white text-black rounded-2xl px-4 py-3 max-w-[70%] mr-auto">
+                <div className="whitespace-pre-wrap break-words">
+                  Thinking...
                 </div>
               </div>
             </div>

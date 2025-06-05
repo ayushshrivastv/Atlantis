@@ -12,6 +12,7 @@ export default function Home() {
   const [showScroll, setShowScroll] = useState(true);
   const [isChatMode, setIsChatMode] = useState(false);
   const [messages, setMessages] = useState<Array<{id: string, text: string, sender: 'user' | 'assistant'}>>([]);
+  const [isAssistantThinking, setIsAssistantThinking] = useState(false);
   
   useEffect(() => {
     const handleScroll = () => {
@@ -37,6 +38,7 @@ export default function Home() {
     
     setMessages([userMessage]);
     setIsChatMode(true);
+    setIsAssistantThinking(true); // Assistant starts thinking
     
     // Simulate assistant response (replace with actual AI integration)
     setTimeout(() => {
@@ -46,6 +48,7 @@ export default function Home() {
         sender: 'assistant' as const
       };
       setMessages(prev => [...prev, assistantMessage]);
+      setIsAssistantThinking(false); // Assistant finished thinking
     }, 1000);
   };
 
@@ -58,6 +61,7 @@ export default function Home() {
     };
     
     setMessages(prev => [...prev, userMessage]);
+    setIsAssistantThinking(true); // Assistant starts thinking
     
     // Simulate assistant response (replace with actual AI integration)
     setTimeout(() => {
@@ -67,6 +71,7 @@ export default function Home() {
         sender: 'assistant' as const
       };
       setMessages(prev => [...prev, assistantMessage]);
+      setIsAssistantThinking(false); // Assistant finished thinking
     }, 1000);
   };
 
@@ -123,7 +128,7 @@ export default function Home() {
           <div className="flex flex-col min-h-screen">
             {/* Floating Chat Container */}
             <div className="flex-1 overflow-hidden">
-              <FloatingChatContainer messages={messages} />
+              <FloatingChatContainer messages={messages} isLoading={isAssistantThinking} />
             </div>
             
             {/* Fixed Bottom Chat Input */}

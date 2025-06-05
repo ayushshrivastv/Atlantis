@@ -28,7 +28,7 @@ export function OpenAPILogo({ width = 200, height = 80, className = "" }) {
       <span 
         className="openapi-logo-text"
         style={{ 
-          fontSize: `${height * 0.75}px`,
+          fontSize: `${height * 0.77}px`,
           lineHeight: 1,
           letterSpacing: '-0.02em'
         }}

@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { CleverlyLogo } from "@/components/CleverlyLogo";
+import { OpenAPILogo } from "@/components/OpenAPILogo";
 import {
   NavigationMenu,
   NavigationMenuContent,
@@ -44,7 +44,7 @@ export function Header() {
     >
       <div className="container mx-auto flex justify-between items-center">
         <Link href="/" className="flex items-center">
-          <CleverlyLogo width={200} height={60} />
+          <OpenAPILogo width={200} height={60} />
         </Link>
 
         <NavigationMenu>

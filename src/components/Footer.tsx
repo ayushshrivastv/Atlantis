@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { CleverlyLogo } from "@/components/CleverlyLogo";
+import { OpenAPILogo } from "@/components/OpenAPILogo";
 
 const footerLinks = {
   company: [
@@ -92,7 +92,7 @@ export function Footer() {
         <div className="grid grid-cols-2 md:grid-cols-5 gap-8 mb-12">
           <div className="col-span-2">
             <Link href="/" className="flex items-center mb-6">
-              <CleverlyLogo width={200} height={60} />
+              <OpenAPILogo width={200} height={60} />
             </Link>
             <p className="text-gray-400 mb-6 max-w-md">
               Pioneering AI research and deployment solutions that responsibly advance artificial intelligence for the benefit of humanity.
