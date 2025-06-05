@@ -23,6 +23,19 @@ interface ContentCategory {
 
 const contentCategories: ContentCategory[] = [
   {
+    title: "Special Report",
+    items: [
+      {
+        id: "ai-financial-analyst",
+        title: "The Algorithmic Analyst: Can AI Untangle Our Thorny Financial Lives?",
+        description: `NEW YORK – For many, the world of personal finance feels like navigating a labyrinth blindfolded. Budgeting, investing, saving for an uncertain future – these are not just numbers on a spreadsheet; they are sources of profound stress and complexity. The traditional image of a financial analyst, often a bespoke service for the affluent, leaves a vast majority grappling with opaque systems and overwhelming choices. But what if a new kind of analyst, one powered by artificial intelligence, could democratize financial wisdom? Experts suggest AI is poised to revolutionize how we manage our money, offering personalized insights and tireless analysis that were once unimaginable. From deciphering market trends to tailoring retirement plans, the promise is a co-pilot for our financial journeys, making sophisticated guidance accessible to all. Yet, as with any powerful tool, questions of trust, bias, and the human touch remain critical.`,
+        image: "https://ext.same-assets.com/1513452751/2405629496.webp", // Placeholder image
+        type: "Insight",
+        readTime: "7 min read"
+      }
+    ]
+  },
+  {
     title: "Featured",
     items: [
       {
@@ -148,7 +161,7 @@ export function ContentFeed() {
                 id={`${category.title}-${item.id}`}
                 className={cn(
                   "content-item bg-zinc-900/30 overflow-hidden transition-all duration-700 shadow-sm hover:bg-zinc-800/40 cursor-pointer group",
-                  visibleItems[`${category.title}-${item.id}`]
+                  (categoryIndex === 0 && itemIndex === 0) || visibleItems[`${category.title}-${item.id}`]
                     ? "opacity-100 translate-y-0"
                     : "opacity-0 translate-y-10",
                   categoryIndex === 0 && "md:flex md:items-center"

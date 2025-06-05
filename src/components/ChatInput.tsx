@@ -3,8 +3,13 @@
 import { useState, useRef, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+import { ArrowUp } from "lucide-react";
 
-export function ChatInput() {
+interface ChatInputProps {
+  onMessageSubmit?: (message: string) => void;
+}
+
+export function ChatInput({ onMessageSubmit }: ChatInputProps) {
   const [message, setMessage] = useState("");
   const [isFocused, setIsFocused] = useState(false);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
@@ -13,77 +18,75 @@ export function ChatInput() {
     e.preventDefault();
     if (!message.trim()) return;
 
+    // Call the parent's message handler
+    if (onMessageSubmit) {
+      onMessageSubmit(message.trim());
+    }
+    
     console.log("Message submitted:", message);
     setMessage("");
+    if (textareaRef.current) {
+      // Reset to initial height after submission
+      textareaRef.current.style.height = "52px"; // Or use the computed min-height
+    }
+  };
+
+  const handleKeyDown = (e: React.KeyboardEvent) => {
+    if (e.key === 'Enter' && !e.shiftKey) {
+      e.preventDefault();
+      handleSubmit(e);
+    }
   };
 
   // Auto-resize textarea based on content
   useEffect(() => {
     if (textareaRef.current) {
-      textareaRef.current.style.height = "inherit";
+      textareaRef.current.style.height = "auto"; // Reset height to recalculate based on content
       const scrollHeight = textareaRef.current.scrollHeight;
-      textareaRef.current.style.height = `${scrollHeight}px`;
+      // Attempt to get max-height from Tailwind class (e.g., max-h-60 which is 15rem or 240px)
+      // Fallback to a pixel value if parsing fails.
+      const computedMaxHeight = getComputedStyle(textareaRef.current).maxHeight;
+      const maxHeight = computedMaxHeight.endsWith('px') ? parseInt(computedMaxHeight, 10) : 240;
+      textareaRef.current.style.height = `${Math.min(scrollHeight, maxHeight)}px`;
     }
   }, [message]);
 
+  const initialMinHeightClass = "min-h-[52px]";
+
   return (
-    <div className="w-full max-w-2xl mx-auto px-4 mb-8">
-      <form onSubmit={handleSubmit} className="relative">
-        <div
-          className={cn(
-            "relative rounded-xl bg-[#0d0d0d] transition-all overflow-hidden",
-            isFocused
-              ? "shadow-sm ring-1 ring-gray-500"
-              : "hover:bg-[#111111]"
-          )}
-        >
+    <div className="w-full max-w-xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div
+        className={cn(
+          "rounded-3xl bg-white p-2 sm:p-3 transition-all shadow-md",
+          isFocused ? "ring-2 ring-blue-500" : "hover:bg-gray-50"
+        )}
+      >
+        <form onSubmit={handleSubmit} id="chat-form" className="flex items-center w-full">
           <textarea
             ref={textareaRef}
             value={message}
             onChange={(e) => setMessage(e.target.value)}
+            onKeyDown={handleKeyDown}
             onFocus={() => setIsFocused(true)}
             onBlur={() => setIsFocused(false)}
-            placeholder="What can I help with?"
-            className="w-full resize-none bg-transparent py-3 pl-4 pr-14 text-white outline-none max-h-60 min-h-[52px]"
+            placeholder="Ask Anything.."
+            className={`flex-grow resize-none bg-transparent py-3 pl-4 pr-2 text-gray-900 placeholder-gray-500 outline-none max-h-60 ${initialMinHeightClass} text-sm sm:text-base`}
             rows={1}
+            style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }} // Hide scrollbar for cleaner look
           />
           <Button
             type="submit"
             size="icon"
             className={cn(
-              "absolute right-2 bottom-2 h-8 w-8 rounded-full bg-white text-black hover:bg-gray-300",
+              "ml-2 bg-gray-100 hover:bg-gray-200 text-gray-700 hover:text-gray-900 rounded-full w-8 h-8 sm:w-9 sm:h-9 shadow flex-shrink-0",
               !message.trim() && "opacity-50 cursor-not-allowed"
             )}
             disabled={!message.trim()}
           >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              className="h-4 w-4"
-            >
-              <path d="M22 2L11 13" />
-              <path d="M22 2L15 22L11 13L2 9L22 2Z" />
-            </svg>
+            <ArrowUp size={18} />
             <span className="sr-only">Send message</span>
           </Button>
-        </div>
-      </form>
-
-      <div className="flex justify-center mt-4 space-x-2">
-        <button className="text-sm text-gray-400 hover:text-white px-3 py-1 rounded-md transition-colors">
-          Search with cleverly
-        </button>
-        <button className="text-sm text-gray-400 hover:text-white px-3 py-1 rounded-md transition-colors">
-          Voice Chat
-        </button>
-        <button className="text-sm text-gray-400 hover:text-white px-3 py-1 rounded-md transition-colors">
-          Research
-        </button>
+        </form>
       </div>
     </div>
   );
