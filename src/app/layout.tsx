@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import { LeftSidebar } from "@/components/LeftSidebar";
+import { AuthProvider } from "@/components/AuthProvider";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -21,10 +22,12 @@ export default function RootLayout({
   return (
     <html lang="en" className={`dark ${inter.className}`}>
       <body className="min-h-screen antialiased bg-black">
-        <LeftSidebar />
-        <main className="pl-48">
-          {children}
-        </main>
+        <AuthProvider>
+          <LeftSidebar />
+          <main className="pl-48">
+            {children}
+          </main>
+        </AuthProvider>
       </body>
     </html>
   );

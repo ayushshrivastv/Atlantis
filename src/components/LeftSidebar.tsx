@@ -13,10 +13,24 @@ const navigationItems = [
   { name: "News", href: "/news" },
 ];
 
+import { useAuthStore } from "@/store/authStore";
 import { useChatStore } from "@/store/chatStore";
+import { getAuth, signOut } from "firebase/auth";
+import { app } from "@/lib/firebase";
 
 export function LeftSidebar() {
-  const { exitChatMode } = useChatStore();
+    const { exitChatMode } = useChatStore();
+    const { user, setUser } = useAuthStore();
+  const auth = getAuth(app);
+
+  const handleLogout = async () => {
+    try {
+      await signOut(auth);
+      setUser(null);
+    } catch (error) {
+      console.error("Error signing out: ", error);
+    }
+  };
   const [hoveredItem, setHoveredItem] = useState<string | null>(null);
 
   return (
@@ -44,15 +58,15 @@ export function LeftSidebar() {
                 onMouseLeave={() => setHoveredItem(null)}
               >
                 <span>{item.name}</span>
-                <svg 
-                  xmlns="http://www.w3.org/2000/svg" 
-                  width="16" 
-                  height="16" 
-                  viewBox="0 0 24 24" 
-                  fill="none" 
-                  stroke="currentColor" 
-                  strokeWidth="2" 
-                  strokeLinecap="round" 
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="16"
+                  height="16"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
                   strokeLinejoin="round"
                   className={cn(
                     "transition-opacity duration-300",
@@ -80,15 +94,15 @@ export function LeftSidebar() {
           onMouseLeave={() => setHoveredItem(null)}
         >
           <span>Help Center</span>
-          <svg 
-            xmlns="http://www.w3.org/2000/svg" 
-            width="16" 
-            height="16" 
-            viewBox="0 0 24 24" 
-            fill="none" 
-            stroke="currentColor" 
-            strokeWidth="2" 
-            strokeLinecap="round" 
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="16"
+            height="16"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
             strokeLinejoin="round"
             className={cn(
               "transition-opacity duration-300",
@@ -98,31 +112,59 @@ export function LeftSidebar() {
             <path d="m9 18 6-6-6-6"/>
           </svg>
         </Link>
-        <Link
-          href="/account"
-          className="flex items-center justify-between py-1.5 px-2 text-white/70 text-sm hover:text-white hover:bg-gray-900/30 rounded-md transition-colors group"
-          onMouseEnter={() => setHoveredItem("account")}
-          onMouseLeave={() => setHoveredItem(null)}
-        >
-          <span>Account</span>
-          <svg 
-            xmlns="http://www.w3.org/2000/svg" 
-            width="16" 
-            height="16" 
-            viewBox="0 0 24 24" 
-            fill="none" 
-            stroke="currentColor" 
-            strokeWidth="2" 
-            strokeLinecap="round" 
-            strokeLinejoin="round"
-            className={cn(
-              "transition-opacity duration-300",
-              hoveredItem === "account" ? "opacity-100" : "opacity-0"
-            )}
+                {user ? (
+          <button
+            onClick={handleLogout}
+            className="flex items-center justify-between py-1.5 px-2 text-white/70 text-sm hover:text-white hover:bg-gray-900/30 rounded-md transition-colors group w-full"
+            onMouseEnter={() => setHoveredItem("account")}
+            onMouseLeave={() => setHoveredItem(null)}
           >
-            <path d="m9 18 6-6-6-6"/>
-          </svg>
-        </Link>
+            <span>Logout</span>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              className={cn(
+                "transition-opacity duration-300",
+                hoveredItem === "account" ? "opacity-100" : "opacity-0"
+              )}
+            >
+              <path d="m9 18 6-6-6-6"/>
+            </svg>
+          </button>
+        ) : (
+          <Link
+            href="/login"
+            className="flex items-center justify-between py-1.5 px-2 text-white/70 text-sm hover:text-white hover:bg-gray-900/30 rounded-md transition-colors group"
+            onMouseEnter={() => setHoveredItem("account")}
+            onMouseLeave={() => setHoveredItem(null)}
+          >
+            <span>Login</span>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              className={cn(
+                "transition-opacity duration-300",
+                hoveredItem === "account" ? "opacity-100" : "opacity-0"
+              )}
+            >
+              <path d="m9 18 6-6-6-6"/>
+            </svg>
+          </Link>
+        )}
       </div>
     </div>
   );

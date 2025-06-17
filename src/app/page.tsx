@@ -1,20 +1,29 @@
 "use client";
 
-
 import { ChatInput } from "@/components/ChatInput";
 import { ContentFeed } from "@/components/ContentFeed";
 import { FloatingChatContainer } from "@/components/FloatingChatContainer";
 import { Button } from "@/components/ui/button";
 import { useChatStore } from "@/store/chatStore";
+import { useAuthStore } from "@/store/authStore";
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { AuthModal } from "@/components/AuthModal";
 
 export default function Home() {
   const { isChatMode, enterChatMode } = useChatStore();
-  const [messages, setMessages] = useState<Array<{id: string, text: string, sender: 'user' | 'assistant'}>>([]);
+  const { user, isAuthModalOpen, setIsAuthModalOpen, logout } = useAuthStore();
+  const router = useRouter();
+  const [messages, setMessages] = useState<Array<{ id: string, text: string, sender: 'user' | 'assistant' }>>([]);
   const [isAssistantThinking, setIsAssistantThinking] = useState(false);
 
   const handleSendMessage = async (messageText: string) => {
+    if (!user) {
+      setIsAuthModalOpen(true);
+      return;
+    }
+
     if (!messageText.trim()) return;
 
     const newUserMessage = { id: Date.now().toString(), text: messageText, sender: 'user' as const };
@@ -55,8 +64,10 @@ export default function Home() {
       {isChatMode ? (
         // Chat Mode Layout
         <div className="flex flex-col h-screen">
-          <div className="flex-1 overflow-y-auto p-4 space-y-4 pb-28">
-            <FloatingChatContainer messages={messages} isLoading={isAssistantThinking} />
+          <div className="flex-1 flex flex-col overflow-hidden">
+            <div className="flex-1 overflow-y-auto p-4 space-y-4 pb-28">
+              <FloatingChatContainer messages={messages} isLoading={isAssistantThinking} />
+            </div>
           </div>
           <div className="fixed bottom-0 left-48 right-0 bg-black/50 backdrop-blur-sm p-4">
             <div className="w-full max-w-xl mx-auto">
@@ -76,10 +87,26 @@ export default function Home() {
             </div>
           </div>
           <div className="absolute top-6 right-6">
-              <Button asChild variant="outline" className="bg-transparent text-white hover:bg-white/10 hover:text-white border-white/30 px-8 py-3 text-lg">
-                <Link href="/login">Login</Link>
+            {user ? (
+              <div className="flex items-center gap-2">
+                <Button variant="outline" className="bg-transparent text-white hover:bg-white/10 hover:text-white border-white/30 px-8 py-3 text-lg">
+                  {user.displayName || 'User'}
+                </Button>
+                <Button
+                  variant="outline"
+                  className="bg-transparent text-red-500 hover:bg-red-500/10 hover:text-red-500 border-red-500/30 px-4 py-2 text-sm"
+                  onClick={logout}
+                >
+                  Logout
+                </Button>
+              </div>
+            ) : (
+              <Button variant="outline" className="bg-transparent text-white hover:bg-white/10 hover:text-white border-white/30 px-8 py-3 text-lg" onClick={() => setIsAuthModalOpen(true)}>
+                Login
               </Button>
-            </div>
+            )}
+          </div>
+          <AuthModal />
           <ContentFeed />
         </div>
       )}
