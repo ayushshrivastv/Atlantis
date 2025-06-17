@@ -1,104 +1,22 @@
-# Project Atlantis: The Search for a Lost City
+# Atlantis: The Search for a Lost City
 
-Welcome to Project Atlantis, a groundbreaking conversational AI platform designed to democratize access to complex climate data and empower users with actionable, data-driven insights. Our mission is to transform the way we understand and interact with climate information, making it intuitive, immediate, and impactful for researchers, policymakers, and the public alike.
+As Earth's temperature climbs and the shadow of global warming grows longer, understanding our world has never been more urgent. Atlantis uses the power of artificial intelligence and MongoDB’s advanced search capabilities to help researchers, activists, and everyday citizens explore public climate data with ease and clarity. Whether comparing air quality in New Delhi and London or analysing decades of rainfall shifts, Atlantis turns complex datasets into simple, human readable insights.
 
-This is more than a data tool; it's a new way to have a conversation with our planet.
+This is about more than data—this is about protecting the only home we’ve ever known. Atlantis gives voice to the numbers, so we can make better choices, tell better stories, and build a future where Earth can breathe again.
 
-## The Architecture: An Intelligent Ecosystem
+For a detailed technical architecture and component flow diagrams, please refer to the [YouTube](https://youtu.be/mIFipOSwufE?feature=shared)
 
-```
-+------------------------+       +------------------------+       +------------------------+
-|        USER           |       | Next.js Frontend       |       | Next.js API Gateway    |
-|  (Natural Language)   |       | (Vercel Hosting)       |       | (Serverless Functions) |
-+------------------------+       +------------------------+       +------------------------+
-          ↓                             ↓                             ↓
-+------------------------+       +------------------------+       +------------------------+
-|   Chat Service        |       |   Google Gemini Pro    |       |  MongoDB Atlas         |
-|  +-----------------+  |       |  +-----------------+  |       |  +-----------------+  |
-|  | Message Queue  |  |       |  | Language Model |  |       |  | Climate Data   |  |
-|  +-----------------+  |       |  +-----------------+  |       |  +-----------------+  |
-|  | Context Manager|  |       |  | Vector Search  |  |       |  | User Profiles  |  |
-+------------------------+       +------------------------+       |  +-----------------+  |
-          ↑                             ↑                             |  | Conversation   |  |
-+------------------------+       +------------------------+       |  +-----------------+  |
-| External Data Sources  |       | Climate Data Embeddings|       |  | History       |  |
-|  +-----------------+  |       +------------------------+       +------------------------+
-|  | Open-Meteo     |  |
-|  +-----------------+  |
-|  | Climate Datasets|  |
-|  +-----------------+  |
-|  | Research Papers|  |
-+------------------------+
+P.S. After 48 hours of coding, debugging, and more coffee than water—here’s the project. The backend isn’t quite where I want it yet—there’s still a lot of work ahead.
 
-Data Flow:
-[USER] → [Frontend] → [API Gateway] → [Chat Service] → [Gemini Pro]
-                ↑                             ↑
-                |                             |
-                +---------------------------+
-                |                           |
-                ↓                           ↓
-[MongoDB Atlas] → [Climate Data Embeddings] → [External Data Sources]
-```
+![Screenshot 2025-06-18 at 1 49 03 AM](https://github.com/user-attachments/assets/859de50e-4b92-4028-91db-b922eb6f2940)
 
-```
-Detailed Flow:
+### Inspiration
 
-[USER] → [Frontend] → [API Gateway] → [Chat Service] → [Gemini Pro]
-  ↓                             ↓                             ↓
-  ↓                             ↓                             ↓
-  ↓                             ↓                             ↓
-[API Request] → [Intent Analysis] → [Entity Extraction] → [Data Compilation]
-  ↑                             ↑                             ↑
-  ↑                             ↑                             ↑
-  ↑                             ↑                             ↑
-[Response Display] ← [Response Generation] ← [Context Retrieval] ← [Data Retrieval]
+I was inspired by the growing urgency of climate change—and the painful truth that, while data is everywhere, understanding it remains out of reach for many. I've imagined Atlantis not as a lost city, but as a second chance: a platform where artificial intelligence becomes the voice of Earth itself. I wanted to build something that could help people see the warning signs before they fade into history.
 
-[Chat Service] ↔ [MongoDB Atlas] (Async Logging)
-[Chat Service] ↔ [External Data Sources] (On Demand)
-```
+### What I've Learned
 
-```
-Component Responsibilities:
-
-Frontend Layer:
-- User Interface Components
-- Chat Interface
-- State Management
-- API Calls
-
-API Gateway Layer:
-- Route Handling
-- Request Validation
-- Response Formatting
-- Error Handling
-
-Chat Service Layer:
-- Message Queue
-- Context Management
-- Conversation State
-- Async Logging
-
-AI Layer:
-- Language Processing
-- Entity Extraction
-- Intent Analysis
-- Response Generation
-
-Data Layer:
-- MongoDB Atlas
-  - Climate Data Storage
-  - User Profiles
-  - Conversation History
-  - Context Management
-
-- External Data Sources
-  - Open-Meteo API
-  - Climate Datasets
-  - Research Papers
-  - Vector Search Index
-```
-
-Project Atlantis is built on a modern, serverless architecture designed for scalability, performance, and intelligence. The entire system works in a seamless flow, from the user's query to the synthesized, context-rich response.
+Building Atlantis taught me how to combine structured and unstructured data from public climate sources, and how to apply MongoDB full text and vector search to retrieve the most relevant, meaningful information. I explored prompt engineering, embedding strategies, and semantic search—learning how to turn raw numbers into human context using AI. To enhance AI driven reasoning and summarisation, I also integrated the Gemini API, enabling more natural and multimodal understanding of complex climate data.
 
 ```mermaid
 graph TD
@@ -139,7 +57,11 @@ At the heart of Project Atlantis lies **MongoDB Atlas**. It is not just a databa
 
 Climate data is inherently messy, diverse, and semi-structured. MongoDB's JSON-like documents allow us to store this varied information—from satellite imagery metadata to historical weather patterns—in a single, unified repository without rigid schemas. This flexibility is paramount.
 
-More importantly, we leverage **MongoDB's Vector Search** to find the hidden signals in the noise. By converting climate data points into high-dimensional vector embeddings, we can perform lightning-fast similarity searches. When a user asks, "Which areas are experiencing weather patterns similar to the 2012 Dust Bowl?", we aren't just querying for keywords. We are searching for conceptual similarity across millions of data points, uncovering analogous events and providing a level of context that would be impossible with traditional databases. This is the future of data analysis, and it's built on MongoDB.
+More importantly, we leverage **MongoDB's Vector Search** to find the hidden signals in the noise. By converting climate data points into high-dimensional vector embeddings, we can perform lightning-fast similarity searches. When a user asks, "Which areas are experiencing weather patterns similar to the 2012 Dust Bowl?", we aren't just querying for keywords. We are searching for conceptual similarity across millions of data points, uncovering analogous events and providing a level of context that would be impossible with traditional databases. This is the future of data analysis, and it's built on MongoDB
+
+
+![Screenshot 2025-06-18 at 1 48 12 AM](https://github.com/user-attachments/assets/5368482a-3bbe-4e0e-971b-b9a8bc0fc4e3)
+
 
 ### The Role of Gemini Pro: The Conversational Soul
 
