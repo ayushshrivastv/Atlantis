@@ -7,7 +7,7 @@ import { AuthProvider } from "@/components/AuthProvider";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "cleverly - Advanced AI Research & Deployment",
+  title: "Atlantis: The Search for a Lost World",
   description: "Pioneering AI research and deployment solutions for a smarter future.",
   icons: {
     icon: "/favicon.ico",

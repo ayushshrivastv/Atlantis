@@ -6,6 +6,72 @@ This is more than a data tool; it's a new way to have a conversation with our pl
 
 ## The Architecture: An Intelligent Ecosystem
 
+```
++------------------------+
+|        USER           |
+|  (Natural Language)   |
++------------------------+
+          ↓
++------------------------+
+| Next.js Frontend       |
+| (React Components)     |
+|  +-----------------+  |
+|  | UI Components  |  |
+|  +-----------------+  |
+|  | Chat Interface |  |
+|  +-----------------+  |
++------------------------+
+          ↓
++------------------------+
+| Next.js API Gateway    |
+|  +-----------------+  |
+|  | /api/chat      |  |
+|  +-----------------+  |
+|  | /api/data      |  |
+|  +-----------------+  |
++------------------------+
+          ↓
++------------------------+
+|   Chat Service        |
+|  +-----------------+  |
+|  | Message Queue  |  |
+|  +-----------------+  |
+|  | Context Manager|  |
+|  +-----------------+  |
++------------------------+
+          ↓
++------------------------+
+| Google Gemini Pro     |
+|  +-----------------+  |
+|  | Language Model |  |
+|  +-----------------+  |
+|  | Vector Search  |  |
+|  +-----------------+  |
++------------------------+
+          ↓
++------------------------+
+| MongoDB Atlas         |
+|  +-----------------+  |
+|  | Climate Data   |  |
+|  +-----------------+  |
+|  | User Profiles  |  |
+|  +-----------------+  |
+|  | Conversation   |  |
+|  +-----------------+  |
+|  | History       |  |
++------------------------+
+          ↓
++------------------------+
+| External Data Sources  |
+|  +-----------------+  |
+|  | Open-Meteo     |  |
+|  +-----------------+  |
+|  | Climate Datasets|  |
+|  +-----------------+  |
+|  | Research Papers|  |
++------------------------+
+```
+
 Project Atlantis is built on a modern, serverless architecture designed for scalability, performance, and intelligence. The entire system works in a seamless flow, from the user's query to the synthesized, context-rich response.
 
 ```mermaid
