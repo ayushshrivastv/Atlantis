@@ -1,4 +1,4 @@
-# Project Atlantis: The Search for a Lost World
+# Project Atlantis: The Search for a Lost City
 
 Welcome to Project Atlantis, a groundbreaking conversational AI platform designed to democratize access to complex climate data and empower users with actionable, data-driven insights. Our mission is to transform the way we understand and interact with climate information, making it intuitive, immediate, and impactful for researchers, policymakers, and the public alike.
 
