@@ -68,6 +68,7 @@ export function FloatingChatContainer({ messages, isLoading }: FloatingChatConta
                       <line x1="16.62" y1="12" x2="10.88" y2="21.94"></line>
                     </svg>
                     <span className="text-xs bg-sky-100 text-sky-700 px-2 py-0.5 rounded-md font-medium">Gemini</span>
+                    <span className="ml-2 text-xs bg-green-100 text-green-800 px-2 py-0.5 rounded-md font-medium">MongoDB</span>
                   </div>
                 )}
                 <div className="whitespace-pre-wrap break-words">

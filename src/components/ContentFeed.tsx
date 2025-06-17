@@ -27,97 +27,30 @@ const contentCategories: ContentCategory[] = [
     items: [
       {
         id: "ai-financial-analyst",
-        title: "The Algorithmic Analyst: Can AI Untangle Our Thorny Financial Lives?",
-        description: `NEW YORK – For many, the world of personal finance feels like navigating a labyrinth blindfolded. Budgeting, investing, saving for an uncertain future – these are not just numbers on a spreadsheet; they are sources of profound stress and complexity. The traditional image of a financial analyst, often a bespoke service for the affluent, leaves a vast majority grappling with opaque systems and overwhelming choices. But what if a new kind of analyst, one powered by artificial intelligence, could democratize financial wisdom? Experts suggest AI is poised to revolutionize how we manage our money, offering personalized insights and tireless analysis that were once unimaginable. From deciphering market trends to tailoring retirement plans, the promise is a co-pilot for our financial journeys, making sophisticated guidance accessible to all. Yet, as with any powerful tool, questions of trust, bias, and the human touch remain critical.`,
-        image: "https://ext.same-assets.com/1513452751/2405629496.webp", // Placeholder image
+        title: "The Data Whisperer: Can AI Help Us Truly Understand the World Around Us?",
+        description: `NEW DELHI – In a time when information is everywhere yet understanding often feels elusive, the challenge isn't just collecting data—it's making sense of it. From climate records to mental health surveys, the digital age has gifted us oceans of public datasets, rich with potential but difficult to navigate. This is where a new breed of technology is stepping in: AI-driven tools that can not only process massive volumes of data but also communicate their meaning with surprising clarity. With the rise of intelligent agents and vector search technologies like those in MongoDB, the dream of interactive, conversational data exploration is becoming a reality. Imagine asking a question—What’s driving housing shortages in urban areas?—and receiving not just a graph, but a clear, contextual explanation grounded in real-world data. By embedding datasets into searchable, semantic frameworks and integrating with platforms like Google, developers are creating systems that allow users to query, visualize, and engage with information in ways that feel more human than machine. But as with any paradigm shift, the promise of AI-powered insight comes with essential questions—about transparency, inclusivity, and the role of human judgment. In this next frontier of understanding, the machines may help us listen more closely to what the data has been trying to tell us all along.`,
+        image: "/images/Gta8NpEXkAAcA5d.jpeg", // Local image
         type: "Insight",
-        readTime: "7 min read"
-      }
-    ]
-  },
-  {
-    title: "Featured",
-    items: [
-      {
-        id: "cleverly-core",
-        title: "Introducing cleverly Core",
-        description: "Our flagship AI system with breakthrough capabilities in reasoning and problem-solving",
-        image: "https://ext.same-assets.com/1513452751/1406521742.webp",
-        type: "Release",
-        readTime: "8 min read"
-      },
-      {
-        id: "vision-api",
-        title: "Vision API Now Available",
-        description: "Integrate powerful vision capabilities into your applications",
-        image: "https://ext.same-assets.com/1513452751/2749911493.webp",
-        type: "Product",
-        readTime: "5 min read"
-      },
-      {
-        id: "research-paper",
-        title: "Scaling Laws for Neural Language Models",
-        description: "Our research on the relationship between model size, compute, and performance",
-        image: "https://ext.same-assets.com/1513452751/1801589045.webp",
-        type: "Research",
-        readTime: "12 min read"
-      }
-    ]
-  },
-  {
-    title: "Latest News",
-    items: [
-      {
-        id: "new-office",
-        title: "cleverly Opens New Research Lab in Toronto",
-        description: "Expanding our global research footprint",
-        image: "https://ext.same-assets.com/1513452751/780556859.webp",
-        type: "Company",
-        readTime: "3 min read",
-        date: "May 10, 2025"
-      },
-      {
-        id: "partnership",
-        title: "Strategic Partnership with Academic Institutions",
-        description: "Collaborating with leading universities on AI safety research",
-        image: "https://ext.same-assets.com/1513452751/3239987721.webp",
-        type: "Partnership",
-        readTime: "4 min read",
-        date: "May 2, 2025"
-      },
-      {
-        id: "conference",
-        title: "Join Us at AI Summit 2025",
-        description: "cleverly researchers to present latest breakthroughs",
-        image: "https://ext.same-assets.com/1513452751/2530830555.webp",
-        type: "Event",
         readTime: "2 min read",
-        date: "Apr 28, 2025"
-      }
-    ]
-  },
-  {
-    title: "Research Spotlight",
-    items: [
-      {
-        id: "alignment",
-        title: "Advances in AI Alignment",
-        description: "New techniques for ensuring AI systems act according to human intent",
-        image: "https://ext.same-assets.com/1513452751/2405629496.webp",
-        type: "Research",
-        readTime: "15 min read"
-      },
-      {
-        id: "multimodal",
-        title: "Multimodal Learning Frameworks",
-        description: "Unifying vision, language, and audio understanding in a single model",
-        image: "https://ext.same-assets.com/1513452751/2567036389.webp",
-        type: "Publication",
-        readTime: "10 min read"
       }
     ]
   }
 ];
+
+const HighlightedDescription = ({ text }: { text: string }) => {
+  const parts = text.split(/(MongoDB|Google)/g);
+  return (
+    <p className="text-sm text-white/90 mb-3">
+      {parts.map((part, i) =>
+        part === 'MongoDB' || part === 'Google' ? (
+          <span key={i} className="bg-purple-500/30 text-purple-300 px-1 rounded-sm font-semibold">{part}</span>
+        ) : (
+          part
+        )
+      )}
+    </p>
+  );
+};
 
 export function ContentFeed() {
   const [visibleItems, setVisibleItems] = useState<{[key: string]: boolean}>({});
@@ -149,7 +82,7 @@ export function ContentFeed() {
   }, []);
 
   return (
-    <div className="w-full max-w-3xl mx-auto pt-16 pb-32">
+    <div className="w-full max-w-2xl mx-auto pt-16 pb-32">
       {contentCategories.map((category, categoryIndex) => (
         <section key={category.title} className="mb-24">
           {/* Content section without heading */}
@@ -160,48 +93,23 @@ export function ContentFeed() {
                 key={item.id}
                 id={`${category.title}-${item.id}`}
                 className={cn(
-                  "content-item bg-zinc-900/30 overflow-hidden transition-all duration-700 shadow-sm hover:bg-zinc-800/40 cursor-pointer group",
-                  (categoryIndex === 0 && itemIndex === 0) || visibleItems[`${category.title}-${item.id}`]
+                  "content-item overflow-hidden transition-all duration-700 group relative",
+                  visibleItems[`${category.title}-${item.id}`]
                     ? "opacity-100 translate-y-0"
-                    : "opacity-0 translate-y-10",
-                  categoryIndex === 0 && "md:flex md:items-center"
+                    : "opacity-0 translate-y-10"
                 )}
               >
-                <div
-                  className={cn(
-                    "relative overflow-hidden",
-                    categoryIndex === 0
-                      ? "aspect-[16/9] md:w-1/2 md:h-auto"
-                      : "aspect-square"
-                  )}
-                >
-                  <Image
-                    src={item.image}
-                    alt={item.title}
-                    fill
-                    sizes="(max-width: 768px) 100vw, 33vw"
-                    className="object-cover transition-all duration-700 group-hover:scale-105 group-hover:brightness-110"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                </div>
-                <CardContent className={cn(
-                  "p-4",
-                  categoryIndex === 0 && "md:w-1/2"
-                )}>
-                  <div className="flex items-center space-x-2 mb-2">
-                    <span className="text-sm font-medium text-gray-300">
+                <img src={item.image} alt={item.title} className="w-full h-auto" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent" />
+                <CardContent className="absolute bottom-0 left-0 p-6 w-full">
+                  <div className="flex items-center mb-2">
+                    <span className="bg-purple-500/30 text-purple-300 px-2 py-1 rounded-full text-xs font-semibold">
                       {item.type}
                     </span>
-                    {item.date && (
-                      <>
-                        <span className="text-gray-500">•</span>
-                        <span className="text-sm text-gray-400">{item.date}</span>
-                      </>
-                    )}
                   </div>
-                  <h3 className="text-lg font-semibold mb-2">{item.title}</h3>
-                  <p className="text-sm text-gray-400 mb-3">{item.description}</p>
-                  <div className="text-xs text-gray-500">{item.readTime}</div>
+                  <h3 className="text-lg font-semibold mb-2 text-white">{item.title}</h3>
+                  <HighlightedDescription text={item.description} />
+                  <div className="text-xs text-gray-300">{item.readTime}</div>
                 </CardContent>
               </Card>
             ))}

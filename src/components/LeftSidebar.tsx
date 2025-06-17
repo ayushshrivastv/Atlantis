@@ -13,12 +13,15 @@ const navigationItems = [
   { name: "News", href: "/news" },
 ];
 
+import { useChatStore } from "@/store/chatStore";
+
 export function LeftSidebar() {
+  const { exitChatMode } = useChatStore();
   const [hoveredItem, setHoveredItem] = useState<string | null>(null);
 
   return (
     <div className="fixed left-0 top-0 h-full w-48 py-6 px-4 bg-black flex flex-col">
-      <Link href="/" className="flex items-center justify-center mb-8 px-2">
+      <Link href="/" className="flex items-center justify-center mb-8 px-2" onClick={exitChatMode}>
         <OpenAPILogo width={140} height={40} className="mx-auto" />
       </Link>
 
@@ -28,8 +31,13 @@ export function LeftSidebar() {
             <li key={item.name}>
               <Link
                 href={item.href}
+                onClick={() => {
+                  if (item.name === 'Home') {
+                    exitChatMode();
+                  }
+                }}
                 className={cn(
-                  "flex items-center justify-between py-1.5 px-2 text-white text-sm hover:bg-gray-900/30 rounded-md transition-colors group",
+                  "flex items-center justify-between py-2 px-2 text-white text-base hover:bg-gray-900/30 rounded-md transition-colors group",
                   hoveredItem === item.name && "bg-gray-900/50"
                 )}
                 onMouseEnter={() => setHoveredItem(item.name)}
@@ -58,6 +66,11 @@ export function LeftSidebar() {
           ))}
         </ul>
       </nav>
+      <div className="flex flex-row items-center justify-center mt-4 space-x-4">
+        <Image src="/logos/Google_Cloud_logo.png" alt="Google Cloud Logo" width={40} height={20} />
+        <Image src="/logos/MongoDB_Logo.svg" alt="MongoDB Logo" width={40} height={20} />
+      </div>
+
 
       <div className="mt-auto pt-6">
         <Link

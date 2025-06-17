@@ -1,0 +1,23 @@
+[
+  {
+    "id": "wef-1",
+    "source": "World Economic Forum",
+    "title": "AI is Being Deployed to Fight Climate Change in 9 Key Ways",
+    "summary": "The World Economic Forum highlights how artificial intelligence is becoming a critical tool in the fight against climate change. AI is not just a single solution but a versatile technology being applied across multiple sectors—from improving the accuracy of climate models and optimizing energy grids to enhancing the resilience of supply chains and monitoring deforestation in real time. This widespread application demonstrates AI’s potential to drive significant environmental impact.",
+    "link": "https://www.weforum.org/stories/2024/02/ai-combat-climate-change/"
+  },
+  {
+    "id": "nyt-1",
+    "source": "The New York Times",
+    "title": "What Will Power the A.I. Revolution?",
+    "summary": "While the potential for AI in climate tech is immense, its own environmental footprint is a growing concern. The New York Times explores the significant energy demands of the data centers that power the AI revolution. The article emphasizes the dual nature of AI: it is both a powerful tool for climate solutions and a new, significant source of energy consumption that must be managed responsibly.",
+    "link": "https://www.nytimes.com/2025/01/07/climate/artificial-intelligence-power-emissions.html"
+  },
+  {
+    "id": "axios-1",
+    "source": "Axios",
+    "title": "Fears of AI Speeding Up Climate Change \"Overstated\"",
+    "summary": "Providing a counter-perspective, a recent report featured in Axios suggests that concerns about AI's negative climate impact may be overstated. The argument is that the efficiency gains and carbon reduction solutions enabled by AI could far outweigh the emissions from its own energy use. This highlights the critical need for a nuanced, data-driven analysis of AI’s net effect on the climate.",
+    "link": "https://www.axios.com/2025/04/10/ai-climate-change-report"
+  }
+]
