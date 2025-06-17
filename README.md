@@ -7,69 +7,95 @@ This is more than a data tool; it's a new way to have a conversation with our pl
 ## The Architecture: An Intelligent Ecosystem
 
 ```
-+------------------------+
-|        USER           |
-|  (Natural Language)   |
-+------------------------+
-          ↓
-+------------------------+
-| Next.js Frontend       |
-| (React Components)     |
-|  +-----------------+  |
-|  | UI Components  |  |
-|  +-----------------+  |
-|  | Chat Interface |  |
-|  +-----------------+  |
-+------------------------+
-          ↓
-+------------------------+
-| Next.js API Gateway    |
-|  +-----------------+  |
-|  | /api/chat      |  |
-|  +-----------------+  |
-|  | /api/data      |  |
-|  +-----------------+  |
-+------------------------+
-          ↓
-+------------------------+
-|   Chat Service        |
-|  +-----------------+  |
-|  | Message Queue  |  |
-|  +-----------------+  |
-|  | Context Manager|  |
-|  +-----------------+  |
-+------------------------+
-          ↓
-+------------------------+
-| Google Gemini Pro     |
-|  +-----------------+  |
-|  | Language Model |  |
-|  +-----------------+  |
-|  | Vector Search  |  |
-|  +-----------------+  |
-+------------------------+
-          ↓
-+------------------------+
-| MongoDB Atlas         |
-|  +-----------------+  |
-|  | Climate Data   |  |
-|  +-----------------+  |
-|  | User Profiles  |  |
-|  +-----------------+  |
-|  | Conversation   |  |
-|  +-----------------+  |
-|  | History       |  |
-+------------------------+
-          ↓
-+------------------------+
-| External Data Sources  |
-|  +-----------------+  |
++------------------------+       +------------------------+       +------------------------+
+|        USER           |       | Next.js Frontend       |       | Next.js API Gateway    |
+|  (Natural Language)   |       | (Vercel Hosting)       |       | (Serverless Functions) |
++------------------------+       +------------------------+       +------------------------+
+          ↓                             ↓                             ↓
++------------------------+       +------------------------+       +------------------------+
+|   Chat Service        |       |   Google Gemini Pro    |       |  MongoDB Atlas         |
+|  +-----------------+  |       |  +-----------------+  |       |  +-----------------+  |
+|  | Message Queue  |  |       |  | Language Model |  |       |  | Climate Data   |  |
+|  +-----------------+  |       |  +-----------------+  |       |  +-----------------+  |
+|  | Context Manager|  |       |  | Vector Search  |  |       |  | User Profiles  |  |
++------------------------+       +------------------------+       |  +-----------------+  |
+          ↑                             ↑                             |  | Conversation   |  |
++------------------------+       +------------------------+       |  +-----------------+  |
+| External Data Sources  |       | Climate Data Embeddings|       |  | History       |  |
+|  +-----------------+  |       +------------------------+       +------------------------+
 |  | Open-Meteo     |  |
 |  +-----------------+  |
 |  | Climate Datasets|  |
 |  +-----------------+  |
 |  | Research Papers|  |
 +------------------------+
+
+Data Flow:
+[USER] → [Frontend] → [API Gateway] → [Chat Service] → [Gemini Pro]
+                ↑                             ↑
+                |                             |
+                +---------------------------+
+                |                           |
+                ↓                           ↓
+[MongoDB Atlas] → [Climate Data Embeddings] → [External Data Sources]
+```
+
+```
+Detailed Flow:
+
+[USER] → [Frontend] → [API Gateway] → [Chat Service] → [Gemini Pro]
+  ↓                             ↓                             ↓
+  ↓                             ↓                             ↓
+  ↓                             ↓                             ↓
+[API Request] → [Intent Analysis] → [Entity Extraction] → [Data Compilation]
+  ↑                             ↑                             ↑
+  ↑                             ↑                             ↑
+  ↑                             ↑                             ↑
+[Response Display] ← [Response Generation] ← [Context Retrieval] ← [Data Retrieval]
+
+[Chat Service] ↔ [MongoDB Atlas] (Async Logging)
+[Chat Service] ↔ [External Data Sources] (On Demand)
+```
+
+```
+Component Responsibilities:
+
+Frontend Layer:
+- User Interface Components
+- Chat Interface
+- State Management
+- API Calls
+
+API Gateway Layer:
+- Route Handling
+- Request Validation
+- Response Formatting
+- Error Handling
+
+Chat Service Layer:
+- Message Queue
+- Context Management
+- Conversation State
+- Async Logging
+
+AI Layer:
+- Language Processing
+- Entity Extraction
+- Intent Analysis
+- Response Generation
+
+Data Layer:
+- MongoDB Atlas
+  - Climate Data Storage
+  - User Profiles
+  - Conversation History
+  - Context Management
+
+- External Data Sources
+  - Open-Meteo API
+  - Climate Datasets
+  - Research Papers
+  - Vector Search Index
 ```
 
 Project Atlantis is built on a modern, serverless architecture designed for scalability, performance, and intelligence. The entire system works in a seamless flow, from the user's query to the synthesized, context-rich response.
